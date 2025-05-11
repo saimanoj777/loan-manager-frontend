@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import avatar from '../assets/avatar.jpg'
+import avatar from '../assets/avatar.png';
 
 export default function Dashboard() {
   const [applications, setApplications] = useState([]);
@@ -7,7 +7,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/user-applications');
+        const response = await fetch('https://loan-manager-backend.onrender.com/api/user-applications'); // Use Render URL
         const data = await response.json();
         setApplications(data);
       } catch (error) {
@@ -22,7 +22,7 @@ export default function Dashboard() {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Credit App</h2>
         <button
-          onClick={() => (window.location.hash = '/form')} // Redirect to /form
+          onClick={() => (window.location.hash = '/form')}
           className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-200 font-medium"
         >
           Get a Loan

@@ -18,7 +18,7 @@ export default function LoanForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/applications', {
+      const response = await fetch('https://loan-manager-backend.onrender.com/api/applications', { // Use Render URL
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -33,8 +33,8 @@ export default function LoanForm() {
         }),
       });
       const responseText = await response.text();
-        console.log('Response status:', response.status);
-        console.log('Response text:', responseText);
+      console.log('Response status:', response.status);
+      console.log('Response text:', responseText);
       if (response.ok) {
         setMessage('Application submitted successfully!');
         setFormData({
@@ -45,16 +45,15 @@ export default function LoanForm() {
           reason: '',
           employmentAddress: '',
         });
-        // Redirect to Dashboard after submission
         setTimeout(() => {
           window.location.hash = '/dashboard';
-        }, 1000); // Delay to show the success message briefly
+        }, 1000);
       } else {
-        setMessage('Error submitting application.');
+        setMessage(`Error submitting application: ${responseText}`);
       }
     } catch (error) {
-        console.error('Fetch error:', error)
-      setMessage('Server error.'+ error.message);
+      console.error('Fetch error:', error);
+      setMessage('Server error: ' + error.message);
     }
   };
 
@@ -155,7 +154,7 @@ export default function LoanForm() {
           Submit
         </button>
       </form>
-      {message && <p className="mt-4 text-center text-green-600 font-medium">{message}</p>}
+      {message && <p className="mt-4 text-center text-red-600 font-medium">{message}</p>}
     </div>
   );
 }
