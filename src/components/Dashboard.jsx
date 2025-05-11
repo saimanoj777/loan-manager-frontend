@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import avatar from '../assets/avatar.png';
+import avatar from '../assets/avatar.jpg';
 
 export default function Dashboard() {
   const [applications, setApplications] = useState([]);
